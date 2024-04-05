@@ -1,0 +1,42 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="channel-art">
+  {% if channel.channel_art %}
+    <img style="object-fit: cover" src="{{ channel.channel_art.url }}" alt="" />
+  {% else %}
+    <img src="https://wallpaper.dog/large/10702685.jpg" alt="" />
+  {% endif %}
+</div>
+<div class="channel-header flex">
+  <div class="channel-img-title flex">
+    {% if channel.image %}
+      <img class="img" src="{{channel.image.url}}" alt="" />
+    {% else %}
+      <img class="img" src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt=""/>
+    {% endif %}
+    <div class="channel-image-texts">
+      <h4>{{ channel.channel_name }}</h4>
+      <span id="count"><span></span> subscriber</span>
+    </div>
+  </div>
+  <div class="channel-header-btns">
+
+    {% if request.user == channel.user %}
+      <div><a href="{% url 'studio' %}" class="channel-join">Studio</a></div>
+    {% endif %}
+
+    {% if request.user != channel.user %}
+      <div><button id="sub_btn" onclick="addSub()" class="channel-subscribe sub_button_channel">Subscribe</button></div>
+    {% endif %}
+  </div>
+</div>
+<div class="channel-header-links flex">
+  <a href="{% url 'channel-profile' channel.id %}" class="display-this">Home</a>
+  <a href="{% url 'channel-video' channel.id %}" class="display-this">Videos</a>
+  <a href="{% url 'channel-community' channel.id %}" class="dont-display-thdis">Community</a>
+  <a href="{% url 'channel-about' channel.id %}" class="display-this">About</a>
+  <a href="{% url 'channel-profile' channel.id %}" class="dont-display-this"><i class="material-icons">search</i></a>
+</div>
+<hr />
+
+{% include "channel/partials/subscribe-axios.html" %}

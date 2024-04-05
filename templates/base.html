@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta  charset="utf-8">
+    <meta  http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta  name="viewport" content="width=device-width, initial-scale=1">
+    <title>Youtube</title>
+
+    <link rel='icon' type='image/png' src='{% static "images/youtube-icon.png" %}'>
+    
+    {% block style %}
+        
+    {% endblock style %}
+    
+    {% block single %}
+    
+    {% endblock single %}
+    
+    <!-- Font Awesome CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!--  Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <style>
+        
+        .message-alert{
+            background-color: rgb(166, 255, 166);
+            padding: 14px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border: 1px green solid;
+        }
+    </style>
+
+</head>
+    <body>
+
+        <div class="header">
+        <div class="header__left">
+            <i id="menu" class="material-icons">menu</i>
+            <a href="index.html"><img src="https://www.xda-developers.com/files/2017/08/After-12-Years-Google-Gives-YouTube-a-New-Logo-1900x700_c.png"></a>
+        </div>
+        <div class="header__search">
+            <form action="{% url "search" %}" method="GET">
+            <input type="text" placeholder="Search" name="q">
+            <button><i class="material-icons">search</i></button>
+            </form>
+        </div>
+        
+
+        <div class="header__icons">
+            <i class="material-icons display-this">search</i>
+            <a href="{% url "upload-video" %}"><i class="material-icons">videocam</i></a>
+            <i class="material-icons">apps</i>
+            <a href="{% url "create-post" request.user.id %}"><i class="material-icons">add</i></a>
+            <i class="material-icons display-this">notifications</i>
+            <a href="{% url "channel-profile" request.user.id %}"><i id="drop-down" class="material-icons display-this">account_circle</i></a>
+
+        </div>
+
+        </div>
+
+        {% block content %}
+        
+        {% endblock content %}
+        
+        <script src="{% static "js/main.js" %}"></script>
+    </body>
+</html>
